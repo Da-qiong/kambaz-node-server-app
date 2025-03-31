@@ -12,9 +12,20 @@ import EnrollmentRoutes from "./Kambaz/Enrollments/routes.js";
 
 const app = express()
 
+const whitelist = [
+    "http://localhost:5173",
+    "https://splendid-dieffenbachia-c5306a.netlify.app"
+];
+
 app.use(cors({
     credentials: true,
-    origin: process.env.NETLIFY_URL || "http://localhost:5173",
+    origin: function (origin, callback) {
+        if (!origin || whitelist.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("CORS not allowed: " + origin));
+        }
+    }
 }));
 const sessionOptions = {
     secret: process.env.SESSION_SECRET || "kambaz",
