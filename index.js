@@ -19,7 +19,7 @@ const app = express()
 
 const whitelist = [
     "http://localhost:5173",
-    "https://astonishing-gecko-162c20.netlify.app/"
+    "https://astonishing-gecko-162c20.netlify.app"
 ];
 
 app.use(cors({
